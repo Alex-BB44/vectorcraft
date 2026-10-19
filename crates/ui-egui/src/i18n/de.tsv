@@ -839,6 +839,7 @@
 	DXF Import Options	DXF-Importoptionen
 	DXF Info	DXF-Informationen
 	DXF Options	DXF-Optionen
+	DWG Options	DWG-Optionen
 	DXF Options Dialog	Dialogfeld „DXF-Optionen“
 	e.g. 1-3, 5	z. B. 1-3, 5
 	Each page prints as one image, at the document's raster effects resolution.	Jede Seite wird als ein Bild gedruckt, in der Rastereffektauflösung des Dokuments.
@@ -1001,6 +1002,7 @@
 	Export CSS…	CSS exportieren…
 	Export Document	Dokument exportieren
 	Export DXF	DXF exportieren
+	Export DWG	DWG exportieren
 	Export EPS	EPS exportieren
 	Export for Screens	Für Bildschirme exportieren
 	Export for Screens Settings	Einstellungen für „Für Bildschirme exportieren“
@@ -4161,6 +4163,7 @@ theme	Appearance	Erscheinungsbild
 @msg	{C}: no effect at index {from}	{C}: kein Effekt bei Index {from}
 @msg	{_1} failed: {e}	{_1} ist fehlgeschlagen: {e}
 @msg	{_1} files can be opened but not written (see document.formats)	{_1}-Dateien können geöffnet, aber nicht geschrieben werden (siehe document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	{_1}-Dateien schreibt nur die Desktop-App (siehe document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	{_1}-Dateien werden von file.saveAsTemplate geschrieben
 @msg	{_1} font families available	{_1} Schriftfamilien verfügbar
 @msg	{_1} is a live effect (Effect › Plug-ins)	{_1} ist ein Live-Effekt (Effekt › Plug-ins)

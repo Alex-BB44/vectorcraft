@@ -1924,6 +1924,7 @@ lighting	Light	Lys
 	Scaling	Skalering
 	Alter Paths for Appearance	Ændr stier for udseendet
 	DXF Options	DXF-indstillinger
+	DWG Options	DWG-indstillinger
 	Export Option	Eksportindstilling
 	Export Selected Art Only	Eksportér kun markeret grafik
 	Number of Colors:	Antal farver:
@@ -2847,6 +2848,7 @@ theme	Appearance	Udseende
 	DXF Info	DXF-info
 	Export Document	Eksportér dokument
 	Export DXF	Eksportér DXF
+	Export DWG	Eksportér DWG
 	Export EPS	Eksportér EPS
 	Export for Screens	Eksportér til skærme
 	Export for Screens Settings	Indstillinger for eksport til skærme

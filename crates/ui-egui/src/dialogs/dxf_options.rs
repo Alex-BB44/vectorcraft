@@ -1,10 +1,11 @@
-//! DXF Options (Export As → DXF): version, scale (1 unit of the art = N drawing units) and
-//! lineweights, number of colours, the format of placed images, Preserve Appearance or Maximize
-//! Editability, and Export Selected Art Only, Alter Paths for Appearance and Outline Text.
+//! DXF Options (Export As → DXF) and DWG Options (Export As → DWG, the same drawing from version
+//! 2000): version, scale (1 unit of the art = N drawing units) and lineweights, number of colours,
+//! the format of placed images, Preserve Appearance or Maximize Editability, and Export Selected
+//! Art Only, Alter Paths for Appearance and Outline Text.
 //!
-//! Fields: `document.export` params (`format: dxf`, `path?`, the artboard choice) and the DXF
-//! options of `document.exportDxf`. OK remembers the options for next time and writes the file
-//! (asking where when there is no path); bad options keep the dialog open.
+//! Fields: `document.export` params (`format: dxf|dwg`, `path?`, the artboard choice) and the DXF
+//! options of `document.exportDxf`. OK remembers the options for next time (DXF and DWG share them)
+//! and writes the file (asking where when there is no path); bad options keep the dialog open.
 
 use serde_json::{Map, Value, json};
 use vectorcraft_cad::{ColorDepth, DxfVersion, Preserve, RasterFormat};
@@ -19,7 +20,7 @@ use crate::{VectorcraftApp, io, widgets};
 pub(super) const KIND: &str = "dxfOptions";
 
 pub(super) const SPEC: DialogSpec = DialogSpec {
-    heading: |_| tl!("DXF Options").into(),
+    heading: |d| if is_dwg(d) { tl!("DWG Options") } else { tl!("DXF Options") }.into(),
     body,
     confirm,
     ok: Some("Export"),
@@ -51,21 +52,40 @@ fn defaults() -> Map<String, Value> {
     m
 }
 
-/// Open DXF Options for an export whose params (path, artboard choice, any DXF option) are
-/// `params`, over the options used last.
+/// Is the dialog writing DWG (else DXF)?
+fn is_dwg(d: &Dialog) -> bool {
+    d.str("format") == "dwg"
+}
+
+/// The versions the dialog offers: every DXF version, or for DWG those from 2000.
+fn versions(dwg: bool) -> impl Iterator<Item = DxfVersion> {
+    DxfVersion::ALL.iter().copied().filter(move |v| !dwg || *v >= DxfVersion::R2000)
+}
+
+/// Open DXF Options, or DWG Options for `format: dwg`, for an export whose params (path, artboard
+/// choice, any DXF option) are `params`, over the options used last.
 pub fn open(app: &mut VectorcraftApp, params: &Value) {
+    let dwg = params.get("format").and_then(Value::as_str).and_then(fileio::format).is_some_and(|f| f.id == "dwg");
     let mut fields = defaults();
-    for given in [&app.ui.dxf_options, params] {
-        if let Some(o) = given.as_object() {
-            fields.extend(o.iter().map(|(k, v)| (k.clone(), v.clone())));
-        }
+    if let Some(o) = app.ui.dxf_options.as_object() {
+        fields.extend(o.iter().map(|(k, v)| (k.clone(), v.clone())));
     }
-    fields.insert("format".into(), json!("dxf"));
+    // A DXF version used last that DWG isn't written as starts DWG Options on the default; one
+    // the params ask for is kept, so OK says what's wrong with it. (`version` may be a number:
+    // 2018 and "2018" alike.)
+    let version = fields.get("version").and_then(|v| DxfVersion::from_id(&v.as_str().map_or_else(|| v.to_string(), str::to_string)));
+    if dwg && !version.is_some_and(|v| versions(true).any(|w| w == v)) {
+        fields.insert("version".into(), json!(DxfVersion::default().id()));
+    }
+    if let Some(o) = params.as_object() {
+        fields.extend(o.iter().map(|(k, v)| (k.clone(), v.clone())));
+    }
+    fields.insert("format".into(), json!(if dwg { "dwg" } else { "dxf" }));
     app.ui.dialog = Some(Dialog::new(KIND, Value::Object(fields)));
 }
 
 fn body(app: &mut VectorcraftApp, ui: &mut egui::Ui, d: &mut Dialog) -> bool {
-    let versions: Vec<(&str, &str)> = DxfVersion::ALL.iter().map(|v| (v.id(), v.label())).collect();
+    let versions: Vec<(&str, &str)> = versions(is_dwg(d)).map(|v| (v.id(), v.label())).collect();
     choice(ui, d, "version", tl!("Version:"), &versions);
     ui.add_space(4.0);
     scale_row(ui, d);
@@ -155,5 +175,5 @@ fn confirm(app: &mut VectorcraftApp, d: &Dialog) -> Result<Value, String> {
         Value::Object(d.fields.iter().filter(|(k, _)| !PER_EXPORT.contains(&k.as_str())).map(|(k, v)| (k.clone(), v.clone())).collect());
     app.ui.dialog = None;
     let path = d.fields.get("path").and_then(Value::as_str).map(str::to_string);
-    io::export(app, Some("dxf"), path, &params)
+    io::export(app, Some(if is_dwg(d) { "dwg" } else { "dxf" }), path, &params)
 }

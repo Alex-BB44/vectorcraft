@@ -484,7 +484,7 @@ fn errors_are_tool_results_not_crashes() {
         ("type_text", json!({"text": "hi"})),
         ("screenshot", json!({"window": true})),
         ("open_file", json!({"path": "/definitely/not/here.svg"})),
-        ("export", json!({"path": "/tmp/out.dwg"})),
+        ("export", json!({"path": "/tmp/out.pict"})),
         ("redo", json!({})),
         ("press_key", json!({"key": "F13"})),
     ];

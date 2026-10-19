@@ -803,6 +803,7 @@
 	DXF Import Options	DXF 导入选项
 	DXF Info	DXF 信息
 	DXF Options	DXF 选项
+	DWG Options	DWG 选项
 	DXF Options Dialog	DXF 选项对话框
 	e.g. 1-3, 5	例如 1-3, 5
 	Each page prints as one image, at the document's raster effects resolution.	每页会以文档的栅格效果分辨率打印为单一图像。
@@ -966,6 +967,7 @@
 	Export CSS…	导出 CSS…
 	Export Document	导出文档
 	Export DXF	导出 DXF
+	Export DWG	导出 DWG
 	Export EPS	导出 EPS
 	Export for Screens	导出为屏幕所用格式
 	Export for Screens Settings	导出为屏幕所用格式设置
@@ -3658,6 +3660,7 @@ imageTrace	Outline	轮廓
 @msg	this file was saved without PDF compatibility, and its editing data can't be read ({why})	此文件保存时未启用 PDF 兼容性，且无法读取其编辑数据 ({why})
 @msg	the export wrote no file	导出未写入任何文件
 @msg	{_1} files can be opened but not written (see document.formats)	{_1} 文件可以打开，但不能写入 (请参阅 document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	{_1} 文件只能由桌面应用写入 (请参阅 document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	{_1} 文件由 file.saveAsTemplate 写入
 @msg	{path}: no file system here (pass dataBase64 to open; omit the path to get dataBase64)	{path}：此处没有文件系统 (要打开文件，请传入 dataBase64；省略路径可获取 dataBase64)
 @msg	Save writes {_1}, not {_2}: use document.export for other formats	保存会写入 {_1}，而不是 {_2}：其他格式请使用 document.export

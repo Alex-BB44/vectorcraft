@@ -406,6 +406,7 @@ fn export_extensions_name_every_writable_format() {
             "vctemplate",
             "txt",
             "dxf",
+            "dwg",
             "eps",
             "emf",
             "wmf",
@@ -441,6 +442,7 @@ fn formats_query_lists_readers_writers_and_options() {
             "png8",
             "txt",
             "dxf",
+            "dwg",
             "eps",
             "emf",
             "wmf",
@@ -532,7 +534,7 @@ fn export_without_path_returns_bytes_and_never_retargets() {
     let r = s.execute("document.export", &json!({"format": "jpg"})).unwrap();
     assert_eq!(&b64(&r)[..2], [0xFF, 0xD8]);
     assert!(r.get("path").is_none());
-    assert!(s.execute("document.export", &json!({"path": dir.join("x.dwg").to_string_lossy()})).is_err(), "DWG can't be written");
+    assert!(s.execute("document.export", &json!({"path": dir.join("x.pict").to_string_lossy()})).is_err(), "PICT can't be written");
     // A never-saved document hands its native bytes back.
     let mut s = session(10.0, 10.0, 1);
     let r = s.execute("document.save", &json!({})).unwrap();

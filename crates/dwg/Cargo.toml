@@ -1,0 +1,14 @@
+[package]
+name = "vectorcraft-dwg"
+description = "DWG export through a DXF bridge: VectorCraft's DXF bytes written as DWG by the acadrust crate (MPL-2.0, used unmodified)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# MPL-2.0: used as an unmodified dependency only, as CADCraft's crates/dwg does (see NOTICE).
+acadrust = "0.6.4"

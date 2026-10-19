@@ -200,11 +200,28 @@ fn every_page(bytes: &[u8], opts: &LoadOptions) -> bool {
     vectorcraft_pdf::info(bytes, opts.password.as_deref()).is_ok_and(|i| parse_range(range, i.pages.len()).is_ok_and(|p| p.len() == i.pages.len()))
 }
 
+/// Why `name` with `bytes` can't be read as a DWG drawing, when it is one: by its content (any name,
+/// even a readable one such as `.dxf` or `.png`; no readable format starts like a DWG) or by its
+/// `.dwg` name. Opening and Place check it before picking a reader.
+pub fn dwg_refusal(verb: &str, name: &str, bytes: &[u8]) -> Option<String> {
+    let named = super::format_for_name(name).is_some_and(|f| f.id == "dwg");
+    (vectorcraft_dwg::is_dwg(bytes) || named)
+        .then(|| format!("can't {verb} `{}`: VectorCraft doesn't read DWG drawings: save it as DXF in the CAD app and {verb} that", file_name(name)))
+}
+
 /// [`load`] with `document.open` options (the PDF pages, box and password; the DXF options).
 pub fn load_with(name: &str, bytes: &[u8], opts: &LoadOptions) -> Result<Loaded> {
-    let format = detect(name, bytes).ok_or_else(|| match super::unsupported(&super::extension(name)) {
-        Some(u) => err(format!("can't open `{}`: {}", file_name(name), u.hint)),
-        None => err(format!("can't open `{name}`: not a format VectorCraft reads (see document.formats)")),
+    if let Some(e) = dwg_refusal("open", name, bytes) {
+        return Err(err(e));
+    }
+    let format = detect(name, bytes).ok_or_else(|| match (super::unsupported(&super::extension(name)), super::format_for_name(name)) {
+        (Some(u), _) => err(format!("can't open `{}`: {}", file_name(name), u.hint)),
+        // Formats that are only written, such as plain text. (`detect` falls back on a readable
+        // extension itself, so a readable format never gets here; the guard keeps it so.)
+        (None, Some(f)) if f.write && !f.read => {
+            err(format!("can't open `{}`: VectorCraft writes {} files but doesn't read them (see document.formats)", file_name(name), f.label))
+        }
+        _ => err(format!("can't open `{name}`: not a format VectorCraft reads (see document.formats)")),
     })?;
     let title = file_name(name);
     let mut converted = false;

@@ -595,8 +595,10 @@ DXF Options: Export As… with the DXF format (`file.exportAs {format: "dxf"}`, 
 (`8`, `16`, `256`, `true`), `rasterFormat` (`png`, `jpeg`), `preserve` (`appearance`, `editability`), `selectedOnly`,
 `alterPaths`, `outlineText`, plus `path` and the artboard choice. `ui.dialog.confirm` checks them (a bad value, or
 Export Selected Art Only with nothing selected, keeps the dialog open), remembers them for the next DXF Options and
-writes the file (asking for a path when there is none). Export As also lists DWG, greyed out: setting its `format` to
-`dwg` shows, and on confirm answers, the hint to export DXF instead.
+writes the file (asking for a path when there is none). Export As… with DWG (`file.exportAs {format: "dwg"}`), or
+`ui.dxfOptionsDialog {format: "dwg", …}`, opens the same dialog as DWG Options (`format: "dwg"`): the same fields, with
+the versions DWG is written as (2000 to 2018); DXF and DWG share the options remembered. DWG is written on the desktop
+only: the web app answers an error.
 
 DXF Import Options: opening a DXF drawing through the app (`app.open`, `file.open`, a drop) or placing one
 (`file.place` with a `.dxf` file and no `dxf` options, which answers `{"dialog": "dxfImport"}`) opens the `dxfImport`

@@ -1,8 +1,8 @@
 //! File → Export → Export As…: the format and Use Artboards (All or a range: one file per
 //! artboard, or one page each in a PDF); without artboards the export covers the visible art. OK
 //! picks the file, then the format's options dialog follows (PNG/JPEG/WebP/PNG-8/GIF Options, SVG
-//! Options, Text Export Options, DXF Options, EPS Options, and Save PDF for artboards as pages),
-//! else the file is written. DWG is listed, greyed out, with what to use instead.
+//! Options, Text Export Options, DXF and DWG Options, EPS Options, and Save PDF for artboards as
+//! pages), else the file is written.
 
 use std::sync::LazyLock;
 
@@ -20,26 +20,15 @@ pub(super) const SPEC: DialogSpec =
 /// The formats Export As writes (the native format and `.ai` are Save As's).
 static FORMATS: LazyLock<Vec<&'static Format>> =
     LazyLock::new(|| fileio::FORMATS.iter().filter(|f| f.write && !matches!(f.id, "vectorcraft" | "ai")).collect());
-/// Formats listed after them that can't be written (`fileio::unsupported` ids), greyed out.
-const UNAVAILABLE: [(&str, &str); 1] = [("dwg", "DWG (use DXF)")];
-static LABELS: LazyLock<Vec<&'static str>> = LazyLock::new(|| FORMATS.iter().map(|f| f.label).chain(UNAVAILABLE.iter().map(|u| u.1)).collect());
-
-/// What to use instead when the field names a format that can't be written (DWG).
-fn unavailable(d: &Dialog) -> Option<(&'static str, &'static str)> {
-    let id = d.str("format");
-    let (_, label) = UNAVAILABLE.iter().find(|u| u.0 == id)?;
-    Some((label, fileio::unsupported(&id)?.hint))
-}
+static LABELS: LazyLock<Vec<&'static str>> = LazyLock::new(|| FORMATS.iter().map(|f| f.label).collect());
 
 /// Open the dialog on `format` (an id or extension, default PNG); `p` may preset `useArtboards`
 /// and `range`.
 pub fn open(app: &mut VectorcraftApp, format: Option<&str>, p: &Value) {
     let n = app.session.active().map_or(0, |s| s.doc.artboards.len());
-    let missing = format.and_then(|f| UNAVAILABLE.iter().find(|u| u.0.eq_ignore_ascii_case(f.trim_start_matches('.'))));
-    let format = match missing {
-        Some((id, _)) => id,
-        None => format.and_then(fileio::format).filter(|f| FORMATS.iter().any(|g| g.id == f.id)).map_or("png", |f| f.id),
-    };
+    // A format this build can't write (DWG in the web app) stays named, with why, rather than
+    // silently becoming PNG.
+    let format = format.and_then(fileio::format).filter(|f| FORMATS.iter().any(|g| g.id == f.id) || not_here(f).is_some()).map_or("png", |f| f.id);
     let range = p.get("range").and_then(Value::as_str);
     app.ui.dialog = Some(Dialog::new(
         "exportAs",
@@ -50,6 +39,18 @@ pub fn open(app: &mut VectorcraftApp, format: Option<&str>, p: &Value) {
             "range": range.map_or_else(|| if n > 1 { format!("1-{n}") } else { "1".into() }, str::to_string),
         }),
     ));
+}
+
+/// Why `f` can't be written in this build, when it is a format VectorCraft writes elsewhere (DWG
+/// in the web app).
+fn not_here(f: &Format) -> Option<String> {
+    (!f.write && !f.read).then(|| fileio::writable_format(Some(f.id), None).err()).flatten()
+}
+
+/// The format the field names that can't be written here, and why.
+fn unavailable(d: &Dialog) -> Option<(&'static str, String)> {
+    let f = fileio::format(&d.str("format"))?;
+    Some((f.label, not_here(f)?))
 }
 
 /// The chosen format (PNG when the field names none Export As writes).
@@ -65,15 +66,15 @@ fn body(_: &mut VectorcraftApp, ui: &mut egui::Ui, d: &mut Dialog) -> bool {
     let missing = unavailable(d);
     egui::Grid::new("export-as").num_columns(2).spacing([10.0, 8.0]).show(ui, |ui| {
         ui.label(egui::RichText::new(tl!("Format:")).color(t.text_dim));
-        let shown = missing.map_or(f.label, |(label, _)| label);
-        if let Some(g) = widgets::dropdown_with(ui, "export-as-format", shown, &LABELS, 160.0, |i| i < FORMATS.len()).and_then(|i| FORMATS.get(i)) {
+        let shown = missing.as_ref().map_or(f.label, |(label, _)| label);
+        if let Some(g) = widgets::dropdown(ui, "export-as-format", shown, &LABELS, 160.0).and_then(|i| FORMATS.get(i)) {
             d.fields.insert("format".into(), json!(g.id));
         }
         ui.end_row();
     });
-    if let Some((_, hint)) = missing {
+    if let Some((_, why)) = &missing {
         ui.add_space(6.0);
-        form::caption(ui, hint);
+        form::caption(ui, why);
     }
     ui.add_space(10.0);
     form::check(ui, d, "useArtboards", tl!("Use Artboards"));
@@ -104,8 +105,8 @@ fn body(_: &mut VectorcraftApp, ui: &mut egui::Ui, d: &mut Dialog) -> bool {
 
 /// Check the artboard range, pick the file, then show the format's options or write the file.
 fn confirm(app: &mut VectorcraftApp, d: &Dialog) -> Result<Value, String> {
-    if let Some((_, hint)) = unavailable(d) {
-        return Err(hint.into());
+    if let Some((_, why)) = unavailable(d) {
+        return Err(why);
     }
     let f = chosen(d).ok_or("no format to export to")?;
     let use_artboards = d.bool("useArtboards");
@@ -146,7 +147,7 @@ fn confirm(app: &mut VectorcraftApp, d: &Dialog) -> Result<Value, String> {
                 png_options::open(app, f, params);
                 return Ok(Value::Null);
             }
-            if f.id == "dxf" {
+            if matches!(f.id, "dxf" | "dwg") {
                 dxf_options::open(app, &params);
                 return Ok(Value::Null);
             }

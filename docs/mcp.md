@@ -2881,13 +2881,15 @@ selected objects in their layers (every export takes it), and `useArtboards: tru
 artboard holding the art over it. What DXF can't hold (gradients and patterns as one colour, blending, opacity masks,
 raster effects, clipping) comes back in `warnings`.
 
-DWG can't be written (no openly licensed writer exists): `document.formats` lists it under `unsupported` with that
-hint, and exporting to it answers with the hint to export DXF. PICT files are not supported either and say so when
-opened.
+DWG is written as the same drawing (`document.exportDwg`, `document.export {format: "dwg"}` or a `.dwg` path, with
+the DXF options and `version` 2000 to 2018, default 2018): VectorCraft writes the DXF and converts it with the
+acadrust crate (MPL-2.0, the bridge CADCraft uses), on the desktop only. DWG files aren't read: opening one answers an
+error. PICT files are not supported and say so when opened.
 
 ```json
 {"name":"run_command","arguments":{"command":"document.exportDxf","params":{"path":"/tmp/plan.dxf","version":"2013","unit":"mm","scale":10,"preserve":"editability"}}}
 {"name":"export","arguments":{"path":"/tmp/plan.dxf","options":{"useArtboards":true,"colors":256}}}
+{"name":"run_command","arguments":{"command":"document.exportDwg","params":{"path":"/tmp/plan.dwg","version":"2004","unit":"mm"}}}
 ```
 
 ## DXF import

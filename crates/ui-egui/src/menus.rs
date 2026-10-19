@@ -763,7 +763,7 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "ui.dxfOptionsDialog",
         "DXF Options Dialog",
         "",
-        "{path?, useArtboards?, range?, …document.exportDxf options} open DXF Options (dialog `dxfOptions`: fields = these options over the ones used last); OK checks them, remembers them and writes path (else asks). Export As… → DXF opens it too",
+        "{format?: dxf (default)|dwg, path?, useArtboards?, range?, …document.exportDxf options} open DXF Options, or DWG Options for format: dwg (dialog `dxfOptions`: fields = these options over the ones used last; DWG offers the versions from 2000); OK checks them, remembers them and writes path (else asks). Export As… → DXF or DWG opens it too",
     ),
     (
         "links.editOriginal",

@@ -809,6 +809,7 @@
 	DXF Import Options	Επιλογές εισαγωγής DXF
 	DXF Info	Πληροφορίες DXF
 	DXF Options	Επιλογές DXF
+	DWG Options	Επιλογές DWG
 	DXF Options Dialog	Παράθυρο επιλογών DXF
 	e.g. 1-3, 5	π.χ. 1-3, 5
 	Earth Tones	Γήινοι τόνοι
@@ -966,6 +967,7 @@
 	Export CSS…	Εξαγωγή CSS…
 	Export Document	Εξαγωγή εγγράφου
 	Export DXF	Εξαγωγή DXF
+	Export DWG	Εξαγωγή DWG
 	Export EPS	Εξαγωγή EPS
 	Export for Screens	Εξαγωγή για οθόνες
 	Export for Screens Settings	Ρυθμίσεις εξαγωγής για οθόνες
@@ -4199,6 +4201,7 @@ theme	Appearance	Εμφάνιση
 @msg	{C}: no effect at index {from}	{C}: δεν υπάρχει εφέ στον δείκτη {from}
 @msg	{_1} failed: {e}	η ενέργεια {_1} απέτυχε: {e}
 @msg	{_1} files can be opened but not written (see document.formats)	τα αρχεία {_1} μπορούν να ανοιχτούν αλλά όχι να αποθηκευτούν (δείτε document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	τα αρχεία {_1} αποθηκεύονται μόνο από την εφαρμογή υπολογιστή (δείτε document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	τα αρχεία {_1} αποθηκεύονται με το file.saveAsTemplate
 @msg	{_1} font families available	{_1} διαθέσιμες οικογένειες γραμματοσειρών
 @msg	{_1} is a live effect (Effect › Plug-ins)	το {_1} είναι δυναμικό εφέ (Εφέ › Πρόσθετα)

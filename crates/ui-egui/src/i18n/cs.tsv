@@ -2098,6 +2098,7 @@ lighting	Light	Světlo
 	Scaling	Měřítko
 	Alter Paths for Appearance	Upravit cesty podle vzhledu
 	DXF Options	Možnosti DXF
+	DWG Options	Možnosti DWG
 	Export Option	Možnost exportu
 	Export Selected Art Only	Exportovat jen vybranou kresbu
 	Number of Colors:	Počet barev:
@@ -3063,6 +3064,7 @@ theme	Appearance	Motiv
 	DXF Info	Informace o DXF
 	Export Document	Exportovat dokument
 	Export DXF	Exportovat DXF
+	Export DWG	Exportovat DWG
 	Export EPS	Exportovat EPS
 	Export for Screens	Exportovat pro obrazovky
 	Export for Screens Settings	Nastavení exportu pro obrazovky
@@ -4524,6 +4526,7 @@ imageTrace	Outline	Obrys
 @msg	{C}: no effect at index {from}	{C}: na indexu {from} není žádný efekt
 @msg	{_1} failed: {e}	{_1} selhalo: {e}
 @msg	{_1} files can be opened but not written (see document.formats)	soubory {_1} lze otevřít, ale ne zapisovat (viz document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	soubory {_1} zapisuje pouze desktopová aplikace (viz document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	soubory {_1} zapisuje file.saveAsTemplate
 @msg	{_1} font families available	Dostupné rodiny písem: {_1}
 @msg	{_1} is a live effect (Effect › Plug-ins)	{_1} je živý efekt (Efekt › Zásuvné moduly)

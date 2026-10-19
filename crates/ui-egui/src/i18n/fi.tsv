@@ -2059,6 +2059,7 @@ lighting	Light	Valo
 	Scaling	Skaalaus
 	Alter Paths for Appearance	Muuta polkuja ulkoasun mukaan
 	DXF Options	DXF-asetukset
+	DWG Options	DWG-asetukset
 	Export Option	Vientiasetus
 	Export Selected Art Only	Vie vain valittu kuvitus
 	Number of Colors:	Värien määrä:
@@ -3012,6 +3013,7 @@ theme	Appearance	Ulkoasu
 	DXF Info	DXF-tiedot
 	Export Document	Vie asiakirja
 	Export DXF	Vie DXF
+	Export DWG	Vie DWG
 	Export EPS	Vie EPS
 	Export for Screens	Vie näytöille
 	Export for Screens Settings	Näytöille viennin asetukset
@@ -4446,6 +4448,7 @@ imageTrace	Outline	Ääriviiva
 @msg	{C}: no effect at index {from}	{C}: ei tehostetta indeksissä {from}
 @msg	{_1} failed: {e}	{_1} epäonnistui: {e}
 @msg	{_1} files can be opened but not written (see document.formats)	{_1}-tiedostoja voi avata mutta ei kirjoittaa (ks. document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	{_1}-tiedostoja kirjoittaa vain työpöytäsovellus (ks. document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	{_1}-tiedostot kirjoitetaan komennolla file.saveAsTemplate
 @msg	{_1} font families available	{_1} fonttiperhettä käytettävissä
 @msg	{_1} is a live effect (Effect › Plug-ins)	{_1} on live-tehoste (Tehoste › Laajennukset)

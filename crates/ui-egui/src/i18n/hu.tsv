@@ -1116,6 +1116,7 @@
 	DXF Import Options	DXF-importálás beállításai
 	DXF Info	DXF-adatok
 	DXF Options	DXF-beállítások
+	DWG Options	DWG-beállítások
 	DXF Options Dialog	DXF-beállítások párbeszédablak
 	e.g. 1-3, 5	pl. 1-3, 5
 	Each page prints as one image, at the document's raster effects resolution.	Minden oldal egyetlen képként nyomtatódik, a dokumentum raszteres effektusainak felbontásával.
@@ -1299,6 +1300,7 @@
 	Export CSS…	CSS exportálása…
 	Export Document	Dokumentum exportálása
 	Export DXF	DXF exportálása
+	Export DWG	DWG exportálása
 	Export EPS	EPS exportálása
 	Export for Screens	Exportálás képernyőkre
 	Export for Screens Settings	Exportálás képernyőkre – beállítások
@@ -4958,6 +4960,7 @@ imageTrace	Outline	Körvonal
 @msg	{_1} failed: {e}	sikertelen: {_1}: {e}
 @msg	{_1} files	{_1} fájlok
 @msg	{_1} files can be opened but not written (see document.formats)	ezek a fájlok megnyithatók, de nem írhatók: {_1} (lásd: document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	ezeket a fájlokat csak az asztali alkalmazás írja: {_1} (lásd: document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	ezeket a fájlokat a file.saveAsTemplate írja: {_1}
 @msg	{_1} font families available	Elérhető betűcsaládok: {_1}
 @msg	{_1} has no {_2} style	ennek nincs ilyen stílusa: {_1} ({_2})

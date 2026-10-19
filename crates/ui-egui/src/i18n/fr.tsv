@@ -855,6 +855,7 @@
 	DXF Import Options	Options d’importation DXF
 	DXF Info	Informations DXF
 	DXF Options	Options DXF
+	DWG Options	Options DWG
 	DXF Options Dialog	Boîte de dialogue Options DXF
 	e.g. 1-3, 5	p. ex. 1-3, 5
 	Each page prints as one image, at the document's raster effects resolution.	Chaque page s’imprime comme une seule image, à la résolution des effets de pixellisation du document.
@@ -1017,6 +1018,7 @@
 	Export CSS…	Exporter le CSS…
 	Export Document	Exporter le document
 	Export DXF	Exporter en DXF
+	Export DWG	Exporter en DWG
 	Export EPS	Exporter en EPS
 	Export for Screens	Exporter pour les écrans
 	Export for Screens Settings	Paramètres d’Exporter pour les écrans
@@ -4220,6 +4222,7 @@ axis	Both	Les deux
 @msg	{C}: no effect at index {from}	{C} : aucun effet à l’indice {from}
 @msg	{_1} failed: {e}	échec de {_1} : {e}
 @msg	{_1} files can be opened but not written (see document.formats)	les fichiers {_1} peuvent être ouverts mais pas écrits (voir document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	les fichiers {_1} ne sont écrits que par l’application de bureau (voir document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	les fichiers {_1} sont écrits par file.saveAsTemplate
 @msg	{_1} font families available	{_1} familles de polices disponibles
 @msg	{_1} is a live effect (Effect › Plug-ins)	{_1} est un effet dynamique (Effet › Plug-ins)

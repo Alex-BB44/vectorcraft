@@ -74,6 +74,7 @@ fn export_tool_lists_engine_formats_and_options() {
             "png8",
             "txt",
             "dxf",
+            "dwg",
             "eps",
             "emf",
             "wmf",

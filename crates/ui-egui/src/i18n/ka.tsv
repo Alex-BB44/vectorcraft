@@ -1823,6 +1823,7 @@ lighting	Light	სინათლე
 	Scaling	მასშტაბირება
 	Alter Paths for Appearance	ტრაექტორიების შეცვლა იერსახის შესანარჩუნებლად
 	DXF Options	DXF-ის პარამეტრები
+	DWG Options	DWG-ის პარამეტრები
 	Export Option	ექსპორტის პარამეტრი
 	Export Selected Art Only	მხოლოდ მონიშნული ნახატის ექსპორტირება
 	Number of Colors:	ფერების რაოდენობა:
@@ -2661,6 +2662,7 @@ theme	Appearance	იერსახე
 	DXF Info	DXF ინფორმაცია
 	Export Document	დოკუმენტის ექსპორტირება
 	Export DXF	DXF ექსპორტი
+	Export DWG	DWG ექსპორტი
 	Export EPS	EPS ექსპორტი
 	Export for Screens	ეკრანებისთვის ექსპორტირება
 	Export for Screens Settings	ეკრანებისთვის ექსპორტის პარამეტრები
@@ -4010,6 +4012,7 @@ effect	Regular	ჩვეულებრივი
 @msg	{C}: no effect at index {from}	{C}: ინდექსზე {from} ეფექტი არ არის
 @msg	{_1} failed: {e}	{_1} ვერ შესრულდა: {e}
 @msg	{_1} files can be opened but not written (see document.formats)	{_1} ფაილების გახსნა შესაძლებელია, ჩაწერა — არა (იხ. document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	{_1} ფაილებს მხოლოდ დესკტოპის აპი წერს (იხ. document.formats)
 @msg	{_1} font families available	ხელმისაწვდომი შრიფტების ოჯახები: {_1}
 @msg	{_1} is a live effect (Effect › Plug-ins)	{_1} ცოცხალი ეფექტია (ეფექტი › პლაგინები)
 @msg	{_1} is already used by {_2}	{_1} უკვე გამოიყენება აქ: {_2}

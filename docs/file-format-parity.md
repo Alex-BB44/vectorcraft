@@ -19,7 +19,7 @@ from the public specifications, and users' own `.ai` files are used locally only
 |---|---:|---:|---|
 | Formats opened or placed | ~30 | 25 | missing: FreeHand, CorelDRAW, DWG, HEIC/HEIF, JPEG 2000, PICT, PCX, Pixar, Word `.doc`, PS |
 | Formats saved (Save As) | 6 (AI, AIT, PDF, EPS, SVG, SVGZ) | 6 + native | `.ai` written PDF-compatible (no Illustrator editing data) or as legacy version 7 (layers and groups, one artboard per file) |
-| Formats exported | ~16 | 17 | missing: DWG, 3D (OBJ/USDA/glTF); extra: GIF/PNG-8 palette export, DXF up to 2018, layered PSD |
+| Formats exported | ~16 | 18 | missing: 3D (OBJ/USDA/glTF); extra: GIF/PNG-8 palette export, DXF up to 2018, layered PSD |
 | **Overall (weighted by use)** | | **~75%** | `.ai` and PDF dominate the weighting |
 
 EPS editing-data follow-up (2026-10-16): both mesh-corner layouts (with and without opacity)
@@ -98,7 +98,7 @@ the app's own editing copy of a file (an EPS after its `%%EOF`, a `.ai`'s `AIPri
 | PostScript `.ps` | open, place | yes (the EPS reader reads its first page; `.epsf` files open and place as EPS) | via Print to PostScript | `tests_epsimport.rs` |
 | SVG / SVGZ | open, place, save | yes | yes (SVG Options, Preserve Editing, symbols, filters, rich text) | strongest format; tests in `crates/svg/tests`; text on a path follows basic shapes as their SVG 2 equivalent paths (#1527); CSS transforms and the `font` shorthand (#1565), percentage lengths in symbols (#1596), Inkscape flowed text as area type (#1568) and Inkscape pages as artboards (#1601) import; an unsupported filter is named in its warning (#1598) |
 | DXF | open, export | yes | yes (R12–2018) | R13–2018 closed SPLINE flags and control-point closure on import verified (#1299); [Autodesk group 70](https://help.autodesk.com/cloudhelp/2024/ENU/AutoCAD-DXF/files/GUID-E1F884F8-AA90-4864-A215-3182D47A9C74.htm). CIRCLE/ARC export fitting, CNC preset and VCarve QA remain open |
-| DWG | open, export | no | no | no open spec; DXF instead |
+| DWG | open, export | no | yes (2000–2018, desktop) | the DXF export converted by the acadrust crate (MPL-2.0, as CADCraft does); opening a DWG answers an error |
 | EMF / WMF | open, export | yes | yes | an oversized embedded PNG or JPEG is refused from its header, before any pixels are decoded (#1776) |
 | PSD | open, place, export | yes (merged image, every mode and depth) | yes (layered, max editability) | placing as layers (Photoshop Import Options) missing; the embedded ICC profile's tags are 4-byte aligned (#1584) |
 | PSB | open | yes (merged image) | no | |

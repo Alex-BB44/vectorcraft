@@ -1938,6 +1938,7 @@ lighting	Light	Licht
 	Scaling	Schaling
 	Alter Paths for Appearance	Paden aanpassen voor uiterlijk
 	DXF Options	DXF-opties
+	DWG Options	DWG-opties
 	Export Option	Exportoptie
 	Export Selected Art Only	Alleen geselecteerde artwork exporteren
 	Number of Colors:	Aantal kleuren:
@@ -2861,6 +2862,7 @@ theme	Appearance	Vormgeving
 	DXF Info	DXF-info
 	Export Document	Document exporteren
 	Export DXF	DXF exporteren
+	Export DWG	DWG exporteren
 	Export EPS	EPS exporteren
 	Export for Screens	Exporteren voor schermen
 	Export for Screens Settings	Instellingen voor schermexport

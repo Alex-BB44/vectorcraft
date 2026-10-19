@@ -1924,6 +1924,7 @@ lighting	Light	Cahaya
 	Scaling	Penskalaan
 	Alter Paths for Appearance	Ubah jalur untuk tampilan
 	DXF Options	Opsi DXF
+	DWG Options	Opsi DWG
 	Export Option	Opsi ekspor
 	Export Selected Art Only	Ekspor hanya karya seni terpilih
 	Number of Colors:	Jumlah warna:
@@ -2847,6 +2848,7 @@ theme	Appearance	Tampilan
 	DXF Info	Info DXF
 	Export Document	Ekspor dokumen
 	Export DXF	Ekspor DXF
+	Export DWG	Ekspor DWG
 	Export EPS	Ekspor EPS
 	Export for Screens	Ekspor untuk layar
 	Export for Screens Settings	Pengaturan ekspor untuk layar

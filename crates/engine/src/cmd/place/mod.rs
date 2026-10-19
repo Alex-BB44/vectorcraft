@@ -142,6 +142,10 @@ pub(crate) fn pt_per_px(ppi: Option<(f64, f64)>) -> (f64, f64) {
 fn load(p: &Value, cmd: &str, board: Option<Rect>) -> Result<Loaded> {
     let src = fileio::source(p, cmd)?;
     let name = fileio::file_name(src.name);
+    // A DWG drawing, before any reader picked by name (text, RTF, Word) takes it.
+    if let Some(e) = fileio::dwg_refusal("place", src.name, &src.bytes) {
+        return Err(bad(cmd, e));
+    }
     // An Affinity file is recognised by its signature, whatever its name says.
     if fileio::TEXT_EXTS.contains(&fileio::extension(src.name).as_str()) && !vectorcraft_affinity::is_affinity(&src.bytes) {
         let text = text::import(&src.bytes, text::TextOptions::parse(p, cmd)?, cmd)?;

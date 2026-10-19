@@ -24,6 +24,11 @@ Rust dependencies (vello_cpu, kurbo, peniko, skrifa, harfrust, usvg, linesweeper
 fetched through crates.io under their own permissive licenses (mostly MIT and/or Apache-2.0; also
 BSD, ISC, Zlib, BSL-1.0 and Unicode-3.0).
 
+One dependency is under a weak-copyleft licence: the acadrust crate (DWG writing,
+https://github.com/hakanaktt/acadrust) is licensed under the Mozilla Public License 2.0 and is used
+unmodified as a separate library (crates/dwg), as CADCraft does. Its source is available from
+crates.io and the repository above.
+
 JPEG export uses the jpeg-encoder crate (MIT OR Apache-2.0, and the IJG License): this software is
 based in part on the work of the Independent JPEG Group.
 

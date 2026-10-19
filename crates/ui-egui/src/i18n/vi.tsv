@@ -999,6 +999,7 @@
 	DXF Import Options	Tùy chọn nhập DXF
 	DXF Info	Thông tin DXF
 	DXF Options	Tùy chọn DXF
+	DWG Options	Tùy chọn DWG
 	DXF Options Dialog	Hộp thoại tùy chọn DXF
 	e.g. 1-3, 5	ví dụ: 1-3, 5
 	Each page prints as one image, at the document's raster effects resolution.	Mỗi trang in như một ảnh, theo độ phân giải hiệu ứng raster của tài liệu.
@@ -1177,6 +1178,7 @@
 	Export CSS…	Xuất CSS…
 	Export Document	Xuất tài liệu
 	Export DXF	Xuất DXF
+	Export DWG	Xuất DWG
 	Export EPS	Xuất EPS
 	Export for Screens	Xuất cho màn hình
 	Export for Screens Settings	Cài đặt xuất cho màn hình
@@ -4616,6 +4618,7 @@ theme	Appearance	Giao diện
 @msg	{_1} failed: {e}	{_1} thất bại: {e}
 @msg	{_1} files	{_1} tệp
 @msg	{_1} files can be opened but not written (see document.formats)	tệp {_1} có thể mở nhưng không thể ghi (xem document.formats)
+@msg	{_1} files are written by the desktop app only (see document.formats)	tệp {_1} chỉ được ghi bởi ứng dụng máy tính (xem document.formats)
 @msg	{_1} files are written by file.saveAsTemplate	tệp {_1} được ghi bằng file.saveAsTemplate
 @msg	{_1} font families available	{_1} họ phông chữ khả dụng
 @msg	{_1} has no {_2} style	{_1} không có kiểu {_2}
